@@ -95,7 +95,34 @@ int main() {
     auto sEnd3 = high_resolution_clock::now();
     auto sDuration3 = duration_cast<microseconds>(sEnd3 - sStart3);
 
-    cout << "Sort" << setw(20) << vDuration3.count() << setw(16) << lDuration3.count() << setw(15) << sDuration3.count() << endl;
+    cout << "Insert" << setw(17) << vDuration3.count() << setw(16) << lDuration3.count() << setw(15) << sDuration3.count() << endl;
+
+    auto vStart4 = high_resolution_clock::now();
+
+    vTrip.erase(vTrip.begin() + (vTrip.size()/2));
+
+    auto vEnd4 = high_resolution_clock::now();
+    auto vDuration4 = duration_cast<microseconds>(vEnd4 - vStart4);
+
+    auto lStart4 = high_resolution_clock::now();
+
+    auto lIt2 = lTrip.begin();
+    advance(lIt2, (lTrip.size()/2)-1);
+    lTrip.erase(lIt2);
+
+    auto lEnd4 = high_resolution_clock::now();
+    auto lDuration4 = duration_cast<microseconds>(lEnd4 - lStart4);
+
+    auto sStart4 = high_resolution_clock::now();
+
+    auto sIt = sTrip.begin();
+    advance(sIt, (sTrip.size()/2)-1);
+    sTrip.erase(sIt);
+
+    auto sEnd4 = high_resolution_clock::now();
+    auto sDuration4 = duration_cast<microseconds>(sEnd4 - sStart4);
+
+    cout << "Delete" << setw(17) << vDuration4.count() << setw(16) << lDuration4.count() << setw(15) << sDuration4.count() << endl;
 
     return 0;
 }

@@ -6,13 +6,26 @@
 #include <fstream>
 
 using namespace std;
+using namespace std::chrono;
 
 const int CODES_SZ = 20000;
 
 int main() {
-    vector<string> vTrip;
     list<string> lTrip;
     set<string> sTrip;
+
+    ifstream fin("codes.txt");
+    string codes[CODES_SZ];
+    int i = 0;
+    while (fin >> codes[i++]);
+    fin.close();
+
+    auto start = high_resolution_clock::now();
+
+    vector<string> vTrip;
+    for (int i = 0; i < CODES_SZ; i++) {
+        vTrip.push_back(codes[i]);
+    }
 
 
 

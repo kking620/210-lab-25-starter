@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include <chrono>
 #include <vector>
 #include <list>
@@ -12,47 +13,45 @@ using namespace std::chrono;
 const int CODES_SZ = 20000;
 
 int main() {
-    list<string> lTrip;
-    set<string> sTrip;
-
-    ifstream fin("codes.txt");
-    string codes[CODES_SZ];
-    int i = 0;
-    while (fin >> codes[i++]);
-    fin.close();
-
-    auto start = high_resolution_clock::now();
+    ifstream vFin("codes.txt");
+    auto vStart = high_resolution_clock::now();
 
     vector<string> vTrip;
-    for (int i = 0; i < CODES_SZ; i++) {
-        vTrip.push_back(codes[i]);
+    string codes;
+    while (getline(vFin, codes)) {
+        vTrip.push_back(codes);
     }
 
-    auto end = high_resolution_clock::now();
-    auto vDuration = duration_cast<milliseconds>(end - start);
+    auto vEnd = high_resolution_clock::now();
+    auto vDuration = duration_cast<milliseconds>(vEnd - vStart);
+    vFin.close();
 
-    auto start = high_resolution_clock::now();
+    ifstream lFin("codes.txt");
+    auto lStart = high_resolution_clock::now();
 
     list<string> lTrip;
-    for (int i = 0; i < CODES_SZ; i++) {
-        vTrip.push_back(codes[i]);
+    while (getline(lFin, codes)) {
+        lTrip.push_back(codes);
     }
 
-    auto end = high_resolution_clock::now();
-    auto lDuration = duration_cast<milliseconds>(end - start);
+    auto lEnd = high_resolution_clock::now();
+    auto lDuration = duration_cast<milliseconds>(lEnd - lStart);
+    lFin.close();
 
-    auto start = high_resolution_clock::now();
+    ifstream sFin("codes.txt");
+    auto sStart = high_resolution_clock::now();
 
-    list<string> lTrip;
-    for (int i = 0; i < CODES_SZ; i++) {
-        sTrip.insert(codes[i]);
+    set<string> sTrip;
+     while (getline(sFin, codes)) {
+        sTrip.insert(codes);
     }
 
-    auto end = high_resolution_clock::now();
-    auto sDuration = duration_cast<milliseconds>(end - start);
+    auto sEnd = high_resolution_clock::now();
+    auto sDuration = duration_cast<milliseconds>(sEnd - sStart);
+    sFin.close();
 
     cout << "Operation" << setw(15) << "Vector" << setw(15) << "List" << setw(15) << "Set\n";
-    cout << "Read" << setw(15) << vDuration.count() << setw(15) << lDuration.count() << setw(15) << sDuration.count() << endl;
+    cout << "Read" << setw(20) << vDuration.count() << setw(16) << lDuration.count() << setw(15) << sDuration.count() << endl;
     
 
     return 0;

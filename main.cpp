@@ -72,7 +72,30 @@ int main() {
 
     cout << "Sort" << setw(20) << vDuration2.count() << setw(16) << lDuration2.count() << setw(15) << sDuration2 << endl;
 
+    auto vStart3 = high_resolution_clock::now();
 
+    sort(vTrip.begin(), vTrip.end());
+
+    auto vEnd3 = high_resolution_clock::now();
+    auto vDuration3 = duration_cast<microseconds>(vEnd3 - vStart3);
+
+    auto lStart3 = high_resolution_clock::now();
+
+    auto lIt = lTrip.begin();
+    advance(lIt, (lTrip.size()/2)-1);
+    lTrip.insert(lIt, "TESTCODE");
+
+    auto lEnd3 = high_resolution_clock::now();
+    auto lDuration3 = duration_cast<microseconds>(lEnd3 - lStart3);
+
+    auto sStart3 = high_resolution_clock::now();
+
+    auto sIt = sTrip.begin();
+    advance(sIt, (sTrip.size()/2)-1);
+    sTrip.insert(sIt, "TESTCODE");
+
+    auto lEnd3 = high_resolution_clock::now();
+    auto lDuration3 = duration_cast<microseconds>(lEnd3 - lStart3);
 
     return 0;
 }

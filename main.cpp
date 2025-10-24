@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <vector>
 #include <list>
@@ -27,7 +28,32 @@ int main() {
         vTrip.push_back(codes[i]);
     }
 
+    auto end = high_resolution_clock::now();
+    auto vDuration = duration_cast<milliseconds>(end - start);
 
+    auto start = high_resolution_clock::now();
+
+    list<string> lTrip;
+    for (int i = 0; i < CODES_SZ; i++) {
+        vTrip.push_back(codes[i]);
+    }
+
+    auto end = high_resolution_clock::now();
+    auto lDuration = duration_cast<milliseconds>(end - start);
+
+    auto start = high_resolution_clock::now();
+
+    list<string> lTrip;
+    for (int i = 0; i < CODES_SZ; i++) {
+        sTrip.insert(codes[i]);
+    }
+
+    auto end = high_resolution_clock::now();
+    auto sDuration = duration_cast<milliseconds>(end - start);
+
+    cout << "Operation" << setw(15) << "Vector" << setw(15) << "List" << setw(15) << "Set\n";
+    cout << "Read" << setw(15) << vDuration.count() << setw(15) << lDuration.count() << setw(15) << sDuration.count() << endl;
+    
 
     return 0;
 }
